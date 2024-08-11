@@ -15,37 +15,40 @@
 // });
 // server.listen(3000);
 
-const express = require("express"); // require express module
-const app = express(); // calls express function to start new Express app
+const express = require("express");
+const dotenv = require("dotenv");
+const app = express();
 const path = require("path");
 const ejs = require("ejs");
+const connect_to_mongo_db = require("./config/database_mongo");
+const router = require("./routes/routes");
 app.use(express.static("public"));
-
+dotenv.config();
 app.set("view engine", "ejs");
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
 });
 
-app.get("/", (req, res) => {
-  // res.sendFile(path.resolve(__dirname, "views/index.html"));
-  res.render("index");
-});
+connect_to_mongo_db();
 
-app.get("/post", (req, res) => {
-  // res.sendFile(path.resolve(__dirname, "views/post.html"));
-  res.render("post");
-});
-app.get("/about", (req, res) => {
-  // res.sendFile(path.resolve(__dirname, "views/about.html"));
-  res.render("about");
-});
+app.use("/", router);
 
-app.get("/contact", (req, res) => {
-  // res.sendFile(path.resolve(__dirname, "views/contact.html"));
-  res.render("contact");
-});
+// app.get("/", (req, res) => {
+//   res.render("index");
+// });
 
-app.get("/notfound", (req, res) => {
-  // res.sendFile(path.resolve(__dirname, "views/notfound.html"));
-});
+// app.get("/post", (req, res) => {
+//   res.render("post");
+// });
+// app.get("/about", (req, res) => {
+//   res.render("about");
+// });
+
+// app.get("/contact", (req, res) => {
+//   res.render("contact");
+// });
+
+// app.get("/notfound", (req, res) => {
+//   res.render("notfound");
+// });
