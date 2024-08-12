@@ -25,6 +25,10 @@ router.get("/notfound", (req, res) => {
   res.render("notfound");
 });
 
+router.get("/create-new-post", (req, res) => {
+  res.render("new-post");
+});
+
 /**
  * BACKEND ROUTES START
  */
